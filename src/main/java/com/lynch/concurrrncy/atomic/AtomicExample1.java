@@ -1,4 +1,4 @@
-package com.lynch.count.atomic;
+package com.lynch.concurrrncy.atomic;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -6,26 +6,25 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.concurrent.atomic.LongAdder;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by lynch on 2019-11-28. <br>
  **/
 @Slf4j
 //线程安全
-// LongAdder
-//LongAdder与AtomicLong
-//AtomicLong 线程低时，全局唯一订单（id)适用
-//LongAdder  并行更高时使用，但统计的时候，可能出现误差
-public class AtomicExample3 {
+// AtomicInteger
+//-----unsafe类
+//-----CAS(compareAndSwapInt)
+//--------native
+public class AtomicExample1 {
 
     //请求总数
     public static int clientTotal = 5000;
     //同时并发执行的线程数
     public static int threadTotal = 200;
 
-    public static LongAdder count = new LongAdder();
+    public static AtomicInteger count = new AtomicInteger(0);
 
     public static void main(String[] args) throws InterruptedException {
         ExecutorService executorService = Executors.newCachedThreadPool();
@@ -46,10 +45,11 @@ public class AtomicExample3 {
         }
         countDownLatch.await();
         executorService.shutdown();
-        log.info("count:{}", count);
+        log.info("concurrrncy:{}", count.get());
     }
 
     private static void add() {
-        count.increment();
+        count.incrementAndGet(); //先增加再取值
+//        concurrrncy.getAndIncrement();//先取值再增加
     }
 }

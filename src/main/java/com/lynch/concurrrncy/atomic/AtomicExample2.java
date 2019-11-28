@@ -1,4 +1,4 @@
-package com.lynch.count.atomic;
+package com.lynch.concurrrncy.atomic;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,11 +45,11 @@ public class AtomicExample2 {
         }
         countDownLatch.await();
         executorService.shutdown();
-        log.info("count:{}", count.get());
+        log.info("concurrrncy:{}", count.get());
     }
 
     private static void add() {
         count.incrementAndGet(); //先增加再取值
-//        count.getAndIncrement();//先取值再增加
+//        concurrrncy.getAndIncrement();//先取值再增加
     }
 }

@@ -1,4 +1,4 @@
-package com.lynch.count;
+package com.lynch.concurrrncy.count;
 
 import lombok.extern.slf4j.Slf4j;
 
