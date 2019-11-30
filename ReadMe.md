@@ -27,6 +27,25 @@ volatile 可见性（通过加入内存屏障和禁止重排序优化来实现�
 lock 原子性、有序性
 
 # atomic包中的类
+1. 原子更新基本类型
+- AtomicBoolean：以原子更新的方式更新boolean；
+- AtomicInteger：以原子更新的方式更新Integer;
+- AtomicLong：以原子更新的方式更新Long；
+
+2. 原子更新数组类型
+- AtomicIntegerArray：原子更新整型数组中的元素；
+- AtomicLongArray：原子更新长整型数组中的元素；
+AtomicReferenceArray：原子更新引用类型数组中的元素
+
+3. 原子更新引用类型
+- AtomicReference：原子更新引用类型；
+- AtomicReferenceFieldUpdater：原子更新引用类型里的字段；
+- AtomicMarkableReference：原子更新带有标记位的引用类型；
+
+4. 原子更新字段类型
+- AtomicIntegerFieldUpdater：原子更新整型字段类；
+- AtomicLongFieldUpdater：原子更新长整型字段类；
+- AtomicStampedReference：原子更新引用类型，这种更新方式会带有版本号。而为什么在更新的时候会带有版本号，是为了解决CAS的ABA问题；
 
 
 # 安全发布对象
@@ -93,4 +112,41 @@ Guava:ImmutableXXX:Collection、List、Set、Map
 - 写操作扩展：Cassandra、Hbase等
 
 # 高并发之缓存思路
+1. 缓存特征
+- 命中率：命中数/（命中数+没有命中数）
+- 最大元素（空间）
+- 清空策略：FIFO、LFU（最少使用）、LRU（最近最少使用策略)、过期时间、随机等
+
+2. 缓存命中率影响因素
+- 业务场景和业务需求
+- 缓存的设计（粒度和策略）[通常情况下粒度越小,命中率越高]
+- 缓存容量和基础设施
+
+3. 缓存分类和应用场景
+- 本地缓存：编程实现（成员变量、局部变量、静态变量)、Guava Cache
+- 分布式缓存：Memcache、Redis
+
+
+> 缓存-Guava Cache
+> - 类似ConcurrentHashMap思路
+> - LocalCache —> LRU算法
+
+
+> 缓存-Memcache
+> - 客户端路由 ->（映射到）服务器
+> - 一致性hash算法（0～2^32-1)
+> - slab_class->slab->page->chuck
+> - 特点
+
+> 缓存-Redis
+> - 数据类型（String\hash\list\set\sorted set)
+> - 编码方式（raw\int\ht\zipmap\linkedlist\ziplist\intset)
+> - 数据备份（master->slave)
+> - 内存、也可持久化到磁盘
+> - 原子性 （单线程）
+> - 场景（最新数据、排行榜、精准过期、唯一性、计数、实时系统等）
+
+
+
+
 
