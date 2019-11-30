@@ -1,17 +1,17 @@
 高并发（HighConcurrency)
 
-#并发与高并发
+# 并发与高并发
 1.并发：多个线程操作相同的资源，保证线程安全，合理使用资源
 
 2.高并发：服务能同时处理很多请求，提高程序性能
 
-#线程安全性
+# 线程安全性
 1.原子性：提供了互斥访问，同一时刻只能有一个线程来对它进行操作
+- atomic包
+- cas算法
+- synchronized
+-Lock
 
-atomic包
-cas算法
-synchronized
-Lock
 2.可见性：一个线程对驻内存的修改可以及时的被其他线程观察到
 
 不可见的原因：
@@ -26,7 +26,7 @@ synchonized 原子性、可见性、有序性
 volatile 可见性（通过加入内存屏障和禁止重排序优化来实现）、有序性
 lock 原子性、有序性
 
-#atomic包中的类
+# atomic包中的类
 
 
 # 安全发布对象
@@ -42,7 +42,7 @@ lock 原子性、有序性
 枚举模式
 
 
-#线程安全策略
+# 线程安全策略
 
 1.不可变对象
 - 对象创建以后其状态就不能修改
@@ -80,4 +80,17 @@ Guava:ImmutableXXX:Collection、List、Set、Map
 - HashMap、TreeMap -> ConcurrentHashMap、ConcurrentSkipListMap(key有序、支持更高的并发)
 
 
-#高并发之扩容思路
+# 高并发之扩容思路
+1.垂直扩容（纵向扩展）：提高系统部件能力
+单个能力——服务器性能
+
+2.水平扩容（横行扩展）：增加更多系统成员来实现
+更多的处理（成员)——服务器集群
+
+> 扩容：数据库
+
+- 读操作扩展：memcache、redis、CDN等缓存
+- 写操作扩展：Cassandra、Hbase等
+
+# 高并发之缓存思路
+
