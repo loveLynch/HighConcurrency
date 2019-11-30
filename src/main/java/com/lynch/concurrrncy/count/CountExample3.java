@@ -11,16 +11,18 @@ import java.util.concurrent.Semaphore;
  * Created by lynch on 2019-11-28. <br>
  **/
 @Slf4j
-//线程安全
-//synchronized
-public class CountExample2 {
+//线程不安全
+//volatile
+//1。适合状态标志量
+//2。double check
+public class CountExample3 {
 
     //请求总数
     public static int clientTotal = 5000;
     //同时并发执行的线程数
     public static int threadTotal = 200;
 
-    public static int count = 0;
+    public static volatile int count = 0;
 
     public static void main(String[] args) throws InterruptedException {
         ExecutorService executorService = Executors.newCachedThreadPool();
@@ -44,7 +46,13 @@ public class CountExample2 {
         log.info("count:{}", count);
     }
 
-    private static synchronized void add() {
+    private static void add() {
         count++;
+        //1。取count(最新)
+
+        //2。执行+1
+        //3。重新写回主存count
+
+        //2、3步可能多线程导致少次数
     }
 }

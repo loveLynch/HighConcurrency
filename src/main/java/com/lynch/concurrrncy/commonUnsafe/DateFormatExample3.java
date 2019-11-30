@@ -1,6 +1,9 @@
-package com.lynch.concurrrncy.count;
+package com.lynch.concurrrncy.commonUnsafe;
 
 import lombok.extern.slf4j.Slf4j;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -8,19 +11,20 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
 /**
- * Created by lynch on 2019-11-28. <br>
+ * Created by lynch on 2019-11-30. <br>
+ * DateTimeFormatter
+ * 线程安全
  **/
 @Slf4j
-//线程安全
-//synchronized
-public class CountExample2 {
+public class DateFormatExample3 {
+    private static DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyyMMdd");
+
 
     //请求总数
     public static int clientTotal = 5000;
     //同时并发执行的线程数
     public static int threadTotal = 200;
 
-    public static int count = 0;
 
     public static void main(String[] args) throws InterruptedException {
         ExecutorService executorService = Executors.newCachedThreadPool();
@@ -28,10 +32,11 @@ public class CountExample2 {
         final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
 
         for (int i = 0; i < clientTotal; i++) {
+            final int count = i;
             executorService.execute(() -> {
                 try {
                     semaphore.acquire();
-                    add();
+                    update(count);
                     semaphore.release();
                 } catch (Exception e) {
                     log.error("exception", e);
@@ -41,10 +46,11 @@ public class CountExample2 {
         }
         countDownLatch.await();
         executorService.shutdown();
-        log.info("count:{}", count);
     }
 
-    private static synchronized void add() {
-        count++;
+    private static void update(int i) {
+        log.info("{},{}", i, DateTime.parse("20191130", dateTimeFormatter).toDate());
+
     }
+
 }
