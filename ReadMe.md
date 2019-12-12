@@ -101,6 +101,49 @@ Guava:ImmutableXXX:Collection、List、Set、Map
 - HashSet、TreeSet -> CopyOnWriteArraySet、ConcurrentSkipListSet(jdk6)
 - HashMap、TreeMap -> ConcurrentHashMap、ConcurrentSkipListMap(key有序、支持更高的并发)
 
+# J.U.C之AQS
+1.AbstractQueuedSynchronizer - AQSI
+- 使用Node实现FIFO队列，可以用于构建锁或者其他同步队列装置的基础框架
+- 利用一个int类型表示状态
+- 使用方法是继承
+- 子类通过继承并通过实现它的方法管理其状态{acquire和release}的方法操纵状态
+- 可以同时实现排它锁和共享锁（共享、独占）
+
+2.CountDownLatch
+- await()方法
+- 一个或多个线程都等待
+- countDown() -> 0 时，处于等待的线程就去执行
+
+3.Semaphore
+- 控制某个资源可以同时访问的个数
+- 用于有限访问的资源
+
+4.CyclicBarrier 
+- 多个线程相互等待，直到都满足后才能执行后续的操作
+- 计数器（+1）reset可重置计算
+- 循环屏障
+- 多线程计算数据，最后合并
+
+5.ReentrantLock与锁
+- ReentrantLock（可重入锁）和synchronized区别
+  - 可重入锁 （都是）
+  - 锁的实现 （ReentrantLock -> JDK, synchronized -> JVM）
+  - 性能的区别
+  - 功能的区别（ReentrantLock手动加锁与释放，synchronized简洁）
+- ReentrantLock独有的功能
+  - 可指定是公平锁还是非公平锁
+  - 提供了一个Condition类，可以分组唤醒需要唤醒的线程
+  - 提高能够中等待锁的线程的机制，lock.lockInterruptibly()
+ 
+
+
+
+# J.U.C组件拓展
+
+# 线程调度-线程池
+
+# 多线程并发拓展
+
 
 # 高并发之扩容思路
 1.垂直扩容（纵向扩展）：提高系统部件能力
