@@ -139,6 +139,15 @@ Guava:ImmutableXXX:Collection、List、Set、Map
 
 
 # J.U.C组件拓展
+1.FutureTask
+- Callable与Runnable接口对比
+- Future接口
+- FutureTask类
+
+2.Fork/Join 框架
+- 大任务分成若干个小任务，最终汇总—>大任务
+- 工作窃取算法（并行）
+- 
 
 # 线程调度-线程池
 
