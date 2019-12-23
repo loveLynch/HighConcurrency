@@ -159,11 +159,13 @@ Guava:ImmutableXXX:Collection、List、Set、Map
 - 线程安全
 - 生产者与消费者
 
-
-|-|Throws Exception|Special Value|Blocks|Times Out|
+| -       | Throws Exception| Special Value  |Blocks|-Times Out|
+| ------------- |:-------------:| -----:|:-------------:| -----:|
 |Insert|add(o)|offer(o)|put(o)|offer(o,timeout,timeunit)|
 |Remove|remove(o)|poll()|take()|poll(timeout,timeunit)|
 |Examine|element()|peek()|-|-|
+
+
 
 > - ArrayBlockingQueue
 > - DelayQueue
@@ -225,6 +227,7 @@ Guava:ImmutableXXX:Collection、List、Set、Map
 5.合理配置
 - CPU密集型任务，就需要尽量压榨CPU，参考值可以设置为NCPU+1
 - IO密集型任务，参考值可以设置为2*NCPU
+
     
 
 
