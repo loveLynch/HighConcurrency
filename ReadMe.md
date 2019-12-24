@@ -159,7 +159,7 @@ Guava:ImmutableXXX:Collection、List、Set、Map
 - 线程安全
 - 生产者与消费者
 
-| -       | Throws Exception| Special Value  |Blocks|-Times Out|
+| -       | Throws Exception| Special Value  |Blocks|Times Out|
 | ------------- |:-------------:| -----:|:-------------:| -----:|
 |Insert|add(o)|offer(o)|put(o)|offer(o,timeout,timeunit)|
 |Remove|remove(o)|poll()|take()|poll(timeout,timeunit)|
@@ -233,6 +233,39 @@ Guava:ImmutableXXX:Collection、List、Set、Map
 
 # 多线程并发拓展
 1.死锁
+> 多个线程同时被阻塞，它们中的一个或者全部都在等待某个资源被释放。由于线程被无限期地阻塞，因此程序不可能正常终止。
+> 产生死锁必须具备以下四个条件：
+- 互斥条件：该资源任意一个时刻只由一个线程占用。
+- 请求与保持条件(hold and wait)：一个进程因请求资源而阻塞时，对已获得的资源保持不放。
+- 不剥夺条件:线程已获得的资源在末使用完之前不能被其他线程强行剥夺，只有自己使用完毕后才释放资源。(即**没有超时自动放弃**锁这一说（synchronized关键字就是会无限等待，没有超时自动放弃锁）)
+- 循环等待条件:若干进程之间形成一种头尾相接的循环等待资源关系
+
+2.多线程并发最佳实践
+- 使用本地变量
+- 使用不可变类
+- 最小化锁的作用域范围：S=1/(1-a+a/n) - 阿姆达尔定律
+- 使用线程池的Executor，而不是直接new Thread执行
+- 宁可使用同步也不要使用线程的wait和notify
+- 使用BlockingQueue实现生产-消费模式
+- 使用并发集合而不是加了锁的同步集合
+- 使用Semaphore创建有界的访问
+- 宁可使用同步代码块，也不使用同步的方法
+- 避免使用静态变量
+
+3.Spring与线程安全
+- Spring bean: singleton、prototype
+- 无状态对象
+
+4.HashMap与ConcurrentHashMap
+- HashMap
+    - 数组与链表
+    - 数组容量与加载因子  -> 扩容resize()
+    - 线程不安全
+    - ...
+    
+- ConcurrentHashMap   
+    - 数组、链表和红黑树
+    - ...
 
 
 # 高并发之扩容思路

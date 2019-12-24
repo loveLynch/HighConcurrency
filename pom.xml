@@ -33,10 +33,10 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <version>2.2.1.RELEASE</version>
             <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<artifactId>spring-boot-starter-logging</artifactId>-->
-                    <!--<groupId>org.springframework.boot</groupId>-->
-                <!--</exclusion>-->
+            <!--<exclusion>-->
+            <!--<artifactId>spring-boot-starter-logging</artifactId>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--</exclusion>-->
             <!--</exclusions>-->
 
         </dependency>
@@ -46,9 +46,9 @@
             <version>1.16.20</version>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>org.slf4j</groupId>-->
-            <!--<artifactId>slf4j-simple</artifactId>-->
-            <!--<version>1.7.25</version>-->
+        <!--<groupId>org.slf4j</groupId>-->
+        <!--<artifactId>slf4j-simple</artifactId>-->
+        <!--<version>1.7.25</version>-->
         <!--</dependency>-->
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -98,6 +98,28 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        <!-- hystrix -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-hystrix</artifactId>
+        </dependency>
+
+        <!-- hystrix dashboard -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.netflix.hystrix</groupId>
+            <artifactId>hystrix-core</artifactId>
+            <version>1.5.12</version>
+        </dependency>
+        <dependency>
+            <groupId>com.netflix.hystrix</groupId>
+            <artifactId>hystrix-javanica</artifactId>
+            <version>1.5.12</version>
         </dependency>
 
 
